@@ -2,7 +2,7 @@
 .DS_Store
 
 # Ignore MySQL db credentials
-server/credentials.php
+#server/credentials.php
 
 # Ignore tmp and zip folders (folders modified on live app)
 files/tmp
