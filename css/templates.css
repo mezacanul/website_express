@@ -1,0 +1,108 @@
+input[type="text"] {
+    width: 20vw;
+}
+
+.detailBlock {
+    margin: 2rem 0;
+}
+
+.additionals {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.extra {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.extra label {
+    margin-bottom: 10px;
+}
+
+.extra textarea {
+    width: 25vw;
+    height: 15rem;
+}
+
+/* .colors {
+    margin: 3rem 0;
+} */
+
+.bgs {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start; */
+}
+
+.bgs input[type="text"] {
+    margin-top: 10px;
+    margin-right: 10px;
+    /* display: block; */
+}
+
+.bgs label {
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.templateDetails {
+    margin: 3rem 0;
+}
+
+.color_container {
+    margin: 10px 0;
+}
+
+.updateSuccess {
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin: 0;
+    margin-top: 10px;
+}
+
+input[name="templateId"] {
+    display: none;
+}
+
+.addTemplate {
+    margin-bottom: 3rem;
+}
+
+.templateAdd {
+    /* padding-top: 2rem; */
+    /* display: none; */
+}
+
+.templateAdd button {
+    margin-right: 1rem;
+}
+
+.templateAdd span {
+    opacity: 0;
+    transition: opacity 0.3s;
+
+}
+
+.templateActions {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+
+.templateActions span {
+    margin-right: 1rem;
+}
+
+.templateActions span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

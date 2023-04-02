@@ -1,0 +1,133 @@
+body {
+    padding: 25px;
+}
+
+hr {
+    margin-bottom: 3rem;
+}
+
+.pageTitle {
+
+}
+
+.pageNav {
+    text-decoration: underline;
+}
+
+.results {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-around;
+}
+
+.item {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 3px solid #333;
+    border-radius: 20px;
+    background-color: white;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.item p {
+    color: black !important;
+}
+
+.item:hover {
+    transform: scale(1.07);
+    box-shadow: -3px 3px 5px hsla(0, 0%, 0%, 0.5);
+}
+
+.item img {
+    width: 100px;
+    height: 100px;
+    object-fit:contain;
+}
+
+.itemName {
+    font-weight: bold;
+}
+
+.itemName:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.itemDetails {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30px 10px;
+    border: 3px solid #333;
+    border-radius: 20px;
+}
+
+.itemTextDetails {
+    width: 50%;
+}
+
+.itemDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.itemDetails textarea {
+    width: 85%;
+    height: 10rem;
+}
+
+.itemDetail input[type="text"] {
+    width: 85%;
+}
+
+.itemDetail label {
+    width: 15%;
+}
+
+.itemDetails img {
+    width: 20rem;
+    height: 20rem;
+    object-fit: contain;
+    border: 1px solid black;
+}
+
+.typeDetail {
+    justify-content: flex-start;
+}
+
+.typeDetail select {
+    width: 20%;
+    text-align: center;
+}
+
+.actionsBlock button {
+    margin-top: 30px;
+    width: 10%;
+}
+
+#search {
+    margin-bottom: 3rem;
+}
+
+.controls {
+    padding: 3rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginationControls .info {
+    margin: 0;
+}
+
+.paginationControls button {
+    padding: 2px 10px;
+}

@@ -1,0 +1,166 @@
+.darkMode {
+    background-color: #404040 !important;
+    color: white !important;
+}
+
+.darkMode a {
+    color: greenyellow !important;
+}
+
+.darkMode a:visited {
+    color: aqua !important;
+}
+
+.darkMode .menu a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.darkMode .menu a:hover {
+    text-decoration: underline;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+}
+
+.title-menu {
+    margin-bottom: 2rem;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.4);
+}
+
+body {
+    background-color: #f6f9f9;
+    color: black;
+    font-family: sans-serif;
+    padding: 20px 15%;
+    margin: 0;
+}
+
+br {
+    margin-bottom: 20px;
+}
+
+.sites {
+    display: flex;
+}
+
+.site_details {
+    margin-right: 20px;
+}
+
+.addBtn {
+    margin-left: 20px;
+}
+
+h1 {
+    font-style: italic;
+    text-align: center;
+    /* margin: 2rem 0; */
+}
+
+.options, .demoLinkContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.options button {
+    margin-left: 10px;
+}
+
+.productOptions {
+    display: flex;
+}
+
+.productOptions label, .productOptions select {
+    margin-right: 10px;
+}
+
+.main_form_container {
+    display: flex;
+}
+
+.top_form {
+    margin-right: 20px;
+}
+
+.input {
+    margin-right: 20px;
+}
+
+.template_configuration {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* border: 1px solid white; */
+    /* padding: 2rem; */
+    border-radius: 20px;
+}
+
+input[type="text"]{
+    margin-right: 10px;
+}
+
+h3 {
+    /* margin-bottom: 20px; */
+    font-size: 2.2rem;
+}
+
+select[name="template"] {
+    margin-right: 10px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.randBtn {
+    margin-right: 10px;
+}
+
+.statusAnim {
+    display: none;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.console {
+    display: none;
+}
+
+.site-options {
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 2rem 3rem 4rem 3rem;
+}
+
+.actions {
+    margin-top: 4rem;
+    margin-bottom: 3rem;   
+}
+
+.actions span {
+    margin-right: 1rem;
+}
+
+.actions span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.fields {
+    margin-bottom: 2rem;
+}

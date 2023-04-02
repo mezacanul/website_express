@@ -1,0 +1,104 @@
+[31-Jan-2023 12:34:12 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/auto_qair.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[10-Feb-2023 17:10:00 America/Mexico_City] PHP Warning:  move_uploaded_file(../files/tmp/YanaEgorova-new-template-180-e0909f8/js/data/products.js): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 111
+[10-Feb-2023 17:10:00 America/Mexico_City] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpJyEz6U' to '../files/tmp/YanaEgorova-new-template-180-e0909f8/js/data/products.js' in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 111
+[10-Feb-2023 17:10:00 America/Mexico_City] PHP Warning:  fopen(../files/tmp/YanaEgorova-new-template-180-e0909f8/js/data/products.js): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 93
+[10-Feb-2023 17:20:28 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/sport_fb01.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[10-Feb-2023 17:22:38 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/sport_fb01.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[10-Feb-2023 17:27:54 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/pet_1wdy.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[12-Feb-2023 22:21:22 America/Mexico_City] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 121
+[12-Feb-2023 22:26:34 America/Mexico_City] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 123
+[12-Feb-2023 22:27:46 America/Mexico_City] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 126
+[12-Feb-2023 22:35:52 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function push() in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php:115
+Stack trace:
+#0 /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php(9): addProductsFromUpload(Array, '../files/tmp/Ya...')
+#1 {main}
+  thrown in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 115
+[12-Feb-2023 22:36:16 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function push() in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php:115
+Stack trace:
+#0 /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php(9): addProductsFromUpload(Array, '../files/tmp/Ya...')
+#1 {main}
+  thrown in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 115
+[12-Feb-2023 22:37:46 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function push() in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php:115
+Stack trace:
+#0 /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php(9): addProductsFromUpload(Array, '../files/tmp/Ya...')
+#1 {main}
+  thrown in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 115
+[12-Feb-2023 22:47:33 America/Mexico_City] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 123
+[21-Feb-2023 10:22:32 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/toy_6lg6.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[27-Feb-2023 11:51:49 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/jewelry_68d0.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[07-Mar-2023 16:15:58 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 62
+[07-Mar-2023 16:25:52 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /home3/lalomeza/public_html/demos/website_express/server/fileUpload.php on line 62
+[07-Mar-2023 16:32:00 America/Mexico_City] PHP Warning:  copy(): The first argument to copy() function cannot be a directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[07-Mar-2023 16:58:09 America/Mexico_City] PHP Warning:  copy(): The first argument to copy() function cannot be a directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[24-Mar-2023 12:19:08 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/auto_qair.jpg): failed to open stream: No such file or directory in /home3/lalomeza/public_html/demos/website_express/server/express.php on line 312
+[26-Mar-2023 11:32:58 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:32:58 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:32:58 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:32:58 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:33:13 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:33:13 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:33:13 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:33:13 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:34:43 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:34:43 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:34:43 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:34:43 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:36 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:36 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:36 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:36 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:39 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:39 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:39 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:37:39 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:46 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:46 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:46 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:46 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:48 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:48 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:48 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:38:48 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:46:40 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:46:40 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:46:40 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:46:40 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:47:06 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:47:06 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:47:06 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 11:47:06 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:25:41 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:25:41 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:25:41 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:25:41 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:09 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:09 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:09 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:09 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:12 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:12 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:12 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[26-Mar-2023 20:26:12 America/Mexico_City] PHP Warning:  Undefined variable $all in /home3/eduard71/public_html/demos/website_express/server/db-routines.php on line 21
+[30-Mar-2023 12:06:10 America/Mexico_City] PHP Warning:  copy(../files/img/backgrounds/jewelry_68d0.jpg): Failed to open stream: No such file or directory in /home3/eduard71/public_html/demos/website_express/server/express.php on line 312
+[30-Mar-2023 12:20:56 America/Mexico_City] PHP Fatal error:  Uncaught ValueError: RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) cannot be empty in /home3/eduard71/public_html/demos/website_express/server/zip.php:25
+Stack trace:
+#0 /home3/eduard71/public_html/demos/website_express/server/zip.php(25): RecursiveDirectoryIterator->__construct('')
+#1 /home3/eduard71/public_html/demos/website_express/server/zip.php(8): zipAndGetDemo('../files/tmp/Ya...', 'KiddingCityToyS...')
+#2 {main}
+  thrown in /home3/eduard71/public_html/demos/website_express/server/zip.php on line 25
+[31-Mar-2023 13:15:42 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 81
+[31-Mar-2023 13:15:42 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 85
+[31-Mar-2023 13:15:42 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 106
+[31-Mar-2023 13:15:42 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 110
+[31-Mar-2023 13:15:43 America/Mexico_City] PHP Warning:  copy(): The first argument to copy() function cannot be a directory in /home3/eduard71/public_html/demos/website_express/server/express.php on line 312
+[31-Mar-2023 13:16:46 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 81
+[31-Mar-2023 13:16:46 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 85
+[31-Mar-2023 13:16:46 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 106
+[31-Mar-2023 13:16:46 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 110
+[31-Mar-2023 13:16:47 America/Mexico_City] PHP Warning:  copy(): The first argument to copy() function cannot be a directory in /home3/eduard71/public_html/demos/website_express/server/express.php on line 312
+[31-Mar-2023 13:17:31 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 81
+[31-Mar-2023 13:17:31 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 85
+[31-Mar-2023 13:17:31 America/Mexico_City] PHP Warning:  Undefined array key 0 in /home3/eduard71/public_html/demos/website_express/server/express.php on line 106
+[31-Mar-2023 13:17:31 America/Mexico_City] PHP Warning:  Trying to access array offset on value of type null in /home3/eduard71/public_html/demos/website_express/server/express.php on line 110
+[31-Mar-2023 13:17:32 America/Mexico_City] PHP Warning:  copy(): The first argument to copy() function cannot be a directory in /home3/eduard71/public_html/demos/website_express/server/express.php on line 312
+[31-Mar-2023 13:17:53 America/Mexico_City] PHP Warning:  copy(../files/tmp/YanaEgorova-new-template-149-26c2647/img/https://www.dignited.com/wp-content/uploads/2018/12/online-shopping.jpg): Failed to open stream: No such file or directory in /home3/eduard71/public_html/demos/website_express/server/express.php on line 312
