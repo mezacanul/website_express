@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="css/products.css">
+<?php require_once("modules/init_config.php") ?>
+<?php // print_r($_COOKIE); ?>
+
+<!-- <link rel="stylesheet" href="css/products.css"> -->
 <link rel="stylesheet" href="css/style.css">
 
 <body class="darkMode">
@@ -92,7 +95,7 @@
                         <label for="products">Products: </label>
                         <select name="products" id="productsSelect">
                             <option value="dont">Dont include</option>
-                            <option value="include">Include</option>
+                            <!-- <option value="include">Include</option> -->
                             <option value="upload">Upload</option>
                         </select>
                     </div>  

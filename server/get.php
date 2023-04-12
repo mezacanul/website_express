@@ -1,7 +1,7 @@
 <?php 
 require_once("credentials.php");
 require_once("db-routines.php");
-// $servername, $dbname, $username, $password
+require_once("main-tools.php");
 
 function getAll(){
 

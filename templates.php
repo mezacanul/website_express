@@ -1,3 +1,4 @@
+<?php require_once("modules/init_config.php") ?>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/templates.css">
 

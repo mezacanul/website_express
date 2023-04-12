@@ -1,11 +1,12 @@
 <?php 
+require_once("credentials.php");
+require_once("db-routines.php");
+require_once("main-tools.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     switch ($_POST["action"]) {
         case 'downloadDemo':
-            $demoPath = $_POST["demoPath"];
-            $siteName = $_POST["siteName"];
-            $demoUrl = zipAndGetDemo($demoPath, $siteName);
+            $demoUrl = zipAndGetDemo($_POST["demoPath"], $_POST["siteName"], $_POST["session_id"]);
             echo json_encode($demoUrl);
             break;
         default:
@@ -13,11 +14,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 }
 
-function zipAndGetDemo($demoPath, $siteName){
-    $pathToZip = realpath($demoPath);
+function zipAndGetDemo($demoPath, $siteName, $session_id){
+    $userConfig = getFromCurrentSession_UserConfig($session_id);
+    $zipFolder = "../files/zip/".$userConfig["user_folder"]."/";
+    $pathToZip = realpath("../".$demoPath);
+    $zipFile = $zipFolder.$siteName.".zip";
+    // $pathToZip = realpath($demoPath);
+    // $pathToZip = realpath($pathToZip);
+    // print_r($zipFolder); exit();
     
     $zip = new ZipArchive();
-    $zip->open("../files/zip/$siteName.zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    $zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    
+    // $pathToZipFile = str_replace("../", "", $zipFile);
+    // return $pathToZipFile;
+    // $zip->close();
+    // exit();
 
     // Create recursive directory iterator
     /** @var SplFileInfo[] $files */
@@ -25,8 +37,7 @@ function zipAndGetDemo($demoPath, $siteName){
         new RecursiveDirectoryIterator($pathToZip),
         RecursiveIteratorIterator::LEAVES_ONLY
     );
-    foreach ($files as $name => $file)
-    {
+    foreach ($files as $name => $file) {
         // Skip directories (they would be added automatically)
         if (!$file->isDir())
         {
@@ -41,7 +52,8 @@ function zipAndGetDemo($demoPath, $siteName){
     // Zip archive will be created only after closing object
     $zip->close();
 
-    return $siteName;
+    $pathToZipFile = str_replace("../", "", $zipFile);
+    return $pathToZipFile;
 }
 
 ?>

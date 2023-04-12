@@ -5,51 +5,20 @@ const target = $("#target")
 // vars
 var userForm = []
 
-function _create() {
-    infoData = $("#mainForm").serializeArray()
-    infoData.forEach(form => {
-        userForm[form.name] = form.value
-    });
-
-    // TO DO: include price info
-
-    switch (userForm["products"]) {
-        case "include":
-            // DEV VAR
-            // demo = { demo: "YanaEgorova-new-template-157-0c00355" }
-            // END DEV
-
-            imgs = Object.values($(".item img"))
-            imgs.pop(); imgs.pop();
-            imgs = imgs.map(img=>{
-                return $(img).attr("src")
-            })
-
-            items = Object.values($(".results").children())
-            items.pop(); items.pop();
-            items = items.map(item=>{
-                return $(item).attr("data-sku")
-            })
-
-            params = {
-                imgs, items, demoPath: demo.demo, action: "includeProducts"
-            }
-
-            $.post("./server/fileUpload.php", params).then((data)=>{
-                try {
-                    res = JSON.parse(data)
-                } catch (error) {
-                    console.log(data);
-                    console.log(error);
-                }
-            })
-            break;
-        case "default":
-            console.log("default");
-            break;
-        default:
-            break;
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
+    return "";
 }
 
 function addToDemosLog(action, error = null) {
@@ -70,6 +39,8 @@ function addToDemosLog(action, error = null) {
 }
 
 function create() {
+    current_session = getCookie("current_session");
+
     $(".createDemoBtn").attr("disabled", "disabled")
     $(".downloadDemoBtn").attr("disabled", "disabled")
     $(".demoLinkContainer a").html("")
@@ -88,18 +59,21 @@ function create() {
     prices = $("select[name='prices']").val()
     templateId = $("select[name='template'] option:checked").attr("data-id")
     toExpress = {
+        current_session,
         template: userForm.template,
         websiteData: websiteData, 
         templateId, type, prices,
         returnAddressId: userForm["returnAddressSelect"]
     }
-
-    // console.log(toExpress);
-    // return
+    // console.log(toExpress); return;
 
     $.post("./server/express.php", toExpress).then((data)=>{
+        // console.log(data);
+        // return
         try {
-            demo = JSON.parse(data)    
+            demo = JSON.parse(data)
+            demoUrl = (demo.serverPath).replace("../", "")
+            siteName = (userForm["url"]).replace(".com", "")
 
             switch (userForm["products"]) {
                 case "upload":
@@ -123,28 +97,28 @@ function create() {
                     })
                     break;
                 case "include":
-                    console.log("include");
-                    // DEV VAR
-                    // demo = { demo: "YanaEgorova-new-template-157-0c00355" }
+                    // console.log("include");
+                    // // DEV VAR
+                    // // demo = { demo: "YanaEgorova-new-template-157-0c00355" }
 
-                    items = Object.values($(".results").children())
-                    items.pop(); items.pop();
-                    items = items.map(item=>{
-                        return $(item).attr("data-sku")
-                    })
+                    // items = Object.values($(".results").children())
+                    // items.pop(); items.pop();
+                    // items = items.map(item=>{
+                    //     return $(item).attr("data-sku")
+                    // })
 
-                    params = {
-                        items, demoPath: demo.serverPath, action: "includeProducts"
-                    }
+                    // params = {
+                    //     items, demoPath: demo.serverPath, action: "includeProducts"
+                    // }
 
-                    $.post("./server/fileUpload.php", params).then((data)=>{
-                        try {
-                            res = JSON.parse(data)
-                        } catch (error) {
-                            console.log(data);
-                            console.log(error);
-                        }
-                    })
+                    // $.post("./server/fileUpload.php", params).then((data)=>{
+                    //     try {
+                    //         res = JSON.parse(data)
+                    //     } catch (error) {
+                    //         console.log(data);
+                    //         console.log(error);
+                    //     }
+                    // })
                     // console.log("include");
                     break;
                 case "default":
@@ -153,22 +127,20 @@ function create() {
                 default:
                     break;
             }
-            
-            // -- TO DO: Put outside of IF statement
-            siteName = (userForm["url"]).replace(".com", "")
 
             addToDemosLog("create");
     
             $(".statusAnim").css( "display", "none" )
-            $(".demoLinkContainer a").attr( "href", ("files/tmp/"+demo.sitePath) )
+            $(".demoLinkContainer a").attr( "href", (demoUrl) )
             $(".demoLinkContainer a").html(userForm["url"])
             $(".createDemoBtn").removeAttr("disabled")
             $(".downloadDemoBtn").removeAttr("disabled")
-            $(".downloadDemoBtn").attr( "onclick", `download("${demo.serverPath}", "${siteName}")` )
+            $(".downloadDemoBtn").attr( "onclick", `download("${demoUrl}", "${siteName}", "${current_session}")` )
 
 
         } catch (e) {
             addToDemosLog("create", data)
+            console.log(data);
             displayDomConsole(e, data)
             return   
         }
@@ -176,7 +148,7 @@ function create() {
 }
 
 function displayDomConsole(error, serverResponse) {
-    console.log(error)
+    console.log(error, serverResponse)
     $(".console p").append(error+"<br>")
     $(".console p").append("(CHECK CONSOLE FOR MORE INFO)<br>")
     $(".console p").append(serverResponse)
@@ -227,11 +199,12 @@ function getFilesParam(input) {
     return fd
 }
 
-function download(demoPath, siteName) {
+function download(demoPath, siteName, session_id) {
     $(".createDemoBtn").attr("disabled", "disabled")
     $(".downloadDemoBtn").attr("disabled", "disabled")
 
     params = {
+        session_id,
         action: "downloadDemo",
         demoPath: demoPath,
         siteName: siteName
@@ -239,8 +212,8 @@ function download(demoPath, siteName) {
     
     $.post("./server/zip.php", params).then((data)=>{
         try {
-            demoUrl = JSON.parse(data)
-            window.open(`files/zip/${demoUrl}.zip`); 
+            pathToZipFile = JSON.parse(data)
+            window.open(pathToZipFile); 
             $(".createDemoBtn").removeAttr("disabled")
             $(".downloadDemoBtn").removeAttr("disabled")   
 

@@ -1,0 +1,8 @@
+.fade-anim {
+    transition: opacity 0.5s;
+}
+
+.login-success, .login-fail {
+    opacity: 0;
+    display: none;
+}

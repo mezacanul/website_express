@@ -1,6 +1,10 @@
 <?php
 require_once("credentials.php");
 require_once("db-routines.php");
+require_once("main-tools.php");
+// require_once("get.php");
+
+date_default_timezone_set("America/Mexico_City");
 
 $prefix = "https://github.com/YanaEgorova/";
 $suffix = "/zipball/master/";
@@ -14,8 +18,8 @@ $arrContextOptions= [
 ];  
 
 // -- Global vars
-$tmpFolder = "../files/tmp";
-$zipFolder = "../files/zip";
+$tmpFolder = "../files/tmp/";
+$zipFolder = "../files/zip/";
 $ignore = [".", "..", ".DS_Store"];
 $delete = [
     "products.js",
@@ -37,6 +41,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $type = $_POST["type"];
     $prices = $_POST["prices"];
     $returnAddressId = $_POST["returnAddressId"];
+    $userConfig = getFromCurrentSession_UserConfig($_POST["current_session"]);
+    $tmpFolder = $tmpFolder.$userConfig["user_folder"]."/";
+    $zipFolder = $zipFolder.$userConfig["user_folder"]."/";
+    // print_r($userConfig);
+    // exit();
 
     // Organize template options
     $templateOptions = getTemplateOptions($templateId);
@@ -128,7 +137,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     cleanFolder($zipFolder);
 
     $response = [
-        "serverPath" => $tmpFolder."/".$newSite,
+        "serverPath" => $tmpFolder.$newSite,
         "sitePath" => $newSite
     ];
 
@@ -158,7 +167,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     cleanFolder($zipFolder);
 
     $response = [
-        "demo" => $tmpFolder."/".$newSite
+        "demo" => $tmpFolder.$newSite
     ];
 
     echo json_encode($response);
@@ -167,7 +176,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 // -- Delete all files from target folder 
 // -- return TRUE
 function cleanFolder($dir){
-    global $tmpFolder;
+    // global $tmpFolder;
 
     $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
@@ -205,11 +214,11 @@ function getTemplatePath(){
     $newSite = [];
     $scan = scandir($tmpFolder);
     foreach($scan as $file) {
-    if (!is_dir("myFolder/$file")) {
+        if (!is_dir("myFolder/$file")) {
             if(!in_array($file, $ignore)){
                 array_push($newSite, $file);
             }
-    }
+        }
     }
     if(count($newSite) == 1) {
         $newSite = $newSite[0];
@@ -223,7 +232,7 @@ function getNewSiteFilePaths($newSite){
     global $tmpFolder;
 
     $newSiteFilePaths = [];
-    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpFolder."/".$newSite)) as $filename) {
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpFolder.$newSite)) as $filename) {
         // filter out "." and ".."
         if ($filename->isDir()) continue;
         $n = new SplFileInfo($filename);
@@ -296,11 +305,14 @@ function addWebsiteData($wdPath, $wd){
 // -- . Add website data to website-data.js file
 function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $addToCode, $prices){
     global $delete, $tmpFolder, $prefix ;
+    // $userConfig = getFromCurrentSession_UserConfig($_COOKIE["current_session"]);
 
     // .
-    $infoFile = $tmpFolder."/".$newSite."/info.txt";
+    $infoFile = $tmpFolder.$newSite."/info.txt";
     $myfile = fopen($infoFile, "w") or die("Unable to open file!");
     $txt = "// -- Template Name: ".str_replace($prefix,"", zipName($url));
+    // $txt = $txt."\n// -- User ID: ".$userConfig["user_id"];
+    $txt = $txt."\n// -- Created: ".date("Y-m-d H:i:s", substr(time(), 0, 10));
     fwrite($myfile, $txt);
     fclose($myfile);
 
@@ -308,7 +320,7 @@ function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $
     if($replaceOptns["replaceBgs"]){
         foreach ($replaceOptns["replaceBgs"] as $rBg) {
             $from = "../files/img/backgrounds/".$rBg["replace"];
-            $to = "../files/tmp/".$newSite.'/img/'.$rBg["bg"];
+            $to = $tmpFolder.$newSite.'/img/'.$rBg["bg"];
             copy($from, $to);
         }
     }
@@ -350,14 +362,13 @@ function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $
                 }
                 addCssToVarsFile($fof, $addToCode["css"]);
                 break;
-            case strpos($fof, "shipping"):
-                if($replaceOptns["replaceColors"]){
-                    replaceColors($fof, $replaceOptns["replaceColors"]);
-                }
-                addCssToVarsFile($fof, $addToCode["css"]);
-                break;
-            default:
-                break;
+            // case strpos($fof, "shipping"):
+            //     if($replaceOptns["replaceColors"]){
+            //         replaceColors($fof, $replaceOptns["replaceColors"]);
+            //     }
+            //     addCssToVarsFile($fof, $addToCode["css"]);
+            //     break;
+            default: break;
         }
     }
 }
