@@ -1,0 +1,7 @@
+#home .btn-group, #home .form-control {
+    margin-bottom: 1rem;
+}
+
+#formFileDirectory {
+    display: none;
+}

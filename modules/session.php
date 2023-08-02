@@ -1,17 +1,12 @@
 <?php 
-session_start();
+// session_start();
 require_once("server/credentials.php");
 require_once("server/db-routines.php");
 require_once("server/session_log.php");
 require_once("server/main-tools.php");
 // exit();
 
-// print_r("Session State: ".getCurrentSessionState($_COOKIE["current_session"])); echo "<br>";
-// echo "PHP session_id(): ".session_id(); echo "<br>";
-// print_r("Cookie current_session: ".$_COOKIE["current_session"]); echo "<br>";
-// echo "Cookie VAR: ";
-// print_r($_COOKIE); echo "<br>";
-// exit();
+// Go to header to print COOKIE and SESSION information
 
 if( isset($_COOKIE["current_session"]) ){
     // -- TO DO: Verify session_state is active
@@ -74,6 +69,7 @@ function getUserConfig($session_id){
 }
 
 function setSessionVars($userConfig){
+    session_start();
     try {
         $_SESSION["user_id"] = $userConfig["user_id"];
         $_SESSION["current_session"] = $userConfig["current_session"];

@@ -55,10 +55,19 @@
             <div class="detailBlock">
                 <p><b>Taglines</b></p>
                 <input type="checkbox" name="main">
-                <label for="main">Main Tagline</label>
-                <!-- <br> -->
+                <label for="main" class="tagline_check">Main Tagline</label>
+
                 <input type="checkbox" name="sub">
-                <label for="sub">Sub Tagline</label>
+                <label for="sub" class="tagline_check">Sub Tagline</label>
+
+                <br>
+                <div class="special_taglines">
+                    <input type="checkbox" name="second_main">
+                    <label for="second_main" class="tagline_check">Second Tagline</label>
+
+                    <input type="checkbox" name="second_sub">
+                    <label for="second_sub" class="tagline_check">Second Sub Tagline</label>
+                </div>
             </div>
 
             <div class="additionals detailBlock">

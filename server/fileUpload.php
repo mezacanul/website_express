@@ -7,6 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         case 'uploadProducts':
             $templatePath = $_POST["newSitePath"];
             $demo = addProductsFromUpload($_FILES, $templatePath);
+            echo json_encode([$_POST, $_FILES]); exit();
             echo json_encode($demo);
             break;
         // case "includeProducts":

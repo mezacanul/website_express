@@ -41,6 +41,7 @@ function addToDemosLog(action, error = null) {
 function create() {
     current_session = getCookie("current_session");
 
+    // GUI handling
     $(".createDemoBtn").attr("disabled", "disabled")
     $(".downloadDemoBtn").attr("disabled", "disabled")
     $(".demoLinkContainer a").html("")
@@ -50,26 +51,27 @@ function create() {
 
 
     infoData = $("#mainForm").serializeArray()
+    // console.log(infoData);
+    // return
     infoData.forEach(form => {
         userForm[form.name] = form.value
     });
     websiteData = getResult(userForm)
 
     type = $("select[name='type']").val()
+    nicheType = $("select[name='type']").find(":selected").attr("data-niche")
     prices = $("select[name='prices']").val()
     templateId = $("select[name='template'] option:checked").attr("data-id")
     toExpress = {
         current_session,
         template: userForm.template,
         websiteData: websiteData, 
-        templateId, type, prices,
+        templateId, type, nicheType, prices,
         returnAddressId: userForm["returnAddressSelect"]
     }
     // console.log(toExpress); return;
 
     $.post("./server/express.php", toExpress).then((data)=>{
-        // console.log(data);
-        // return
         try {
             demo = JSON.parse(data)
             demoUrl = (demo.serverPath).replace("../", "")
@@ -89,11 +91,15 @@ function create() {
                         type: 'POST',
                     }
         
+                    console.log(ajaxOptions);
+                    
                     $.ajax(ajaxOptions).then((data)=>{
-                        setTimeout(() => {
-                            console.log(data);
-                        }, 4500);
+                        // return
+                        // setTimeout(() => {
+                        //     console.log(data);
+                        // }, 4500);
                         demo = JSON.parse(data)
+                        console.log(demo);
                     })
                     break;
                 case "include":
@@ -348,14 +354,22 @@ function getTemplateInfo(id) {
             if(!$("input[name='sub']").is(":checked") && $.inArray("sub", taglines) != -1) {
                 $("input[name='sub']").click()
             }
+            if(!$("input[name='second_main']").is(":checked") && $.inArray("second_main", taglines) != -1) {
+                $("input[name='second_main']").click()
+            }
+            if(!$("input[name='second_sub']").is(":checked") && $.inArray("second_sub", taglines) != -1) {
+                $("input[name='second_sub']").click()
+            }
             // $("input[name='main']").attr("checked", ($.inArray("main", taglines) != -1 ? true : false))
             // $("input[name='sub']").attr("checked", ($.inArray("sub", taglines) != -1 ? true : false))
         } else {
             $("input[name='main']").is(":checked") ? $("input[name='main']").click() : ""
             $("input[name='sub']").is(":checked") ? $("input[name='sub']").click() : ""
+            $("input[name='second_main']").is(":checked") ? $("input[name='second_main']").click() : ""
+            $("input[name='second_sub']").is(":checked") ? $("input[name='second_sub']").click() : ""
         }
 
-        if(template.bgs != ""){
+        if(template.bgs){
             bgs = JSON.parse(template.bgs)
             bgs.forEach(bg => {
                 addBackground(bg)
@@ -364,7 +378,7 @@ function getTemplateInfo(id) {
             $(".bg_container").remove()
         }
 
-        if(template.colors != ""){
+        if(template.colors){
             colors = JSON.parse(template.colors)
             colors.forEach(color => {
                 addColor(color)
@@ -375,6 +389,12 @@ function getTemplateInfo(id) {
 
         $("textarea[name='css']").val(template.css)
         $("textarea[name='js']").val(template.js)
+
+        if(template.type == "special"){
+            $(".special_taglines").css("display", "block")
+        } else {
+            $(".special_taglines").css("display", "none")
+        }
 
         $(".deleteBtn").attr("onclick", `deleteTemplate("${template.id}")`)
         // console.log(template);
@@ -435,7 +455,9 @@ function updateTemplate() {
 
     if($("input[name='main']").is(":checked")){ taglines.push("main") }
     if($("input[name='sub']").is(":checked")){ taglines.push("sub") }
-    
+    if($("input[name='second_main']").is(":checked")){ taglines.push("second_main") }
+    if($("input[name='second_sub']").is(":checked")){ taglines.push("second_sub") }
+
     formData = {
         id: $("input[name='templateId']").val(),
         url: $("input[name='url']").val(),

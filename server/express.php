@@ -2,6 +2,7 @@
 require_once("credentials.php");
 require_once("db-routines.php");
 require_once("main-tools.php");
+require_once("js-text.php");
 // require_once("get.php");
 
 date_default_timezone_set("America/Mexico_City");
@@ -39,12 +40,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $websiteData = $_POST["websiteData"];
     $templateId = $_POST["templateId"];
     $type = $_POST["type"];
+    $nicheType = $_POST["nicheType"];
     $prices = $_POST["prices"];
     $returnAddressId = $_POST["returnAddressId"];
     $userConfig = getFromCurrentSession_UserConfig($_POST["current_session"]);
     $tmpFolder = $tmpFolder.$userConfig["user_folder"]."/";
     $zipFolder = $zipFolder.$userConfig["user_folder"]."/";
-    // print_r($userConfig);
+    
+    // echo($type.$nicheType);
     // exit();
 
     // Organize template options
@@ -82,21 +85,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }, $replaceColors);
     }
 
-    if($replaceBgs){
-        $replaceBgs = array_map(function($bg) {
-            global $type;
-    
-            $getNewBgs = "SELECT * FROM backgrounds WHERE type = '$type' ORDER BY rand() LIMIT 1";
-            $nBg = getQuery($getNewBgs)[0];
-    
-            $bgOpt = [
-                "bg"=>$bg,
-                "replace"=>$nBg["fileId"]
-            ];
-            return $bgOpt;
-        }, $replaceBgs);
-    }
-
     if($replaceTaglines){
         $replaceTaglines = array_map(function($tgln) {
             global $type;
@@ -106,7 +94,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     $getNewTgln = "SELECT * FROM taglines WHERE type = 'sub' ORDER BY rand() LIMIT 1";
                     break;
                 case 'main':
-                    $getNewTgln = "SELECT * FROM taglines WHERE type = '$type' ORDER BY rand() LIMIT 1";
+                    $getNewTgln = "SELECT * FROM taglines WHERE type = '$type' AND sub = 'short' ORDER BY rand() LIMIT 1";
+                    break;
+                case 'second_main':
+                    $getNewTgln = "SELECT * FROM taglines WHERE type = '$type' AND sub = 'short' ORDER BY rand() LIMIT 1";
+                    break;
+                case 'second_sub':
+                    $getNewTgln = "SELECT * FROM taglines WHERE type = '$type' AND sub = 'long' ORDER BY rand() LIMIT 1";
                     break;
                 default:
                     # code...
@@ -122,18 +116,41 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }, $replaceTaglines);
     }
 
+    if($replaceBgs){
+        $replaceBgs = array_map(function($bg) {
+            global $type;
+    
+            if($type == "preworkout"){
+                $getNewBgs = "SELECT * FROM backgrounds WHERE type = 'sport' ORDER BY rand() LIMIT 1";
+            } elseif($type == "keto") {
+                $getNewBgs = "SELECT * FROM backgrounds WHERE type = 'nutra' ORDER BY rand() LIMIT 1";
+            } else {
+                $getNewBgs = "SELECT * FROM backgrounds WHERE type = '$type' ORDER BY rand() LIMIT 1";
+            }
+            $nBg = getQuery($getNewBgs)[0];
+    
+            $bgOpt = [
+                "bg"=>$bg,
+                "replace"=>$nBg["fileId"]
+            ];
+            return $bgOpt;
+        }, $replaceBgs);
+    }
+
     $replaceOptns = [
         "replaceColors"=>$replaceColors,
         "replaceBgs"=>$replaceBgs,
         "replaceTaglines"=>$replaceTaglines
     ];
 
+
     cleanFolder($tmpFolder);
     downloadAndExtractZip($templateUrl, $zipFolder, $tmpFolder);
     
     $newSite = getTemplatePath();
     $newSiteFilePaths = getNewSiteFilePaths($newSite);
-    performActions($newSite, $newSiteFilePaths, $templateUrl, $websiteData, $replaceOptns, $addToCode, $prices, $returnAddressId);
+    performActions($newSite, $newSiteFilePaths, $templateUrl, $websiteData, $replaceOptns, $addToCode, $prices, $returnAddressId, $type, $nicheType);
+
     cleanFolder($zipFolder);
 
     $response = [
@@ -303,11 +320,13 @@ function addWebsiteData($wdPath, $wd){
 // -- . Add info.txt file
 // -- . Delete files from $delete array
 // -- . Add website data to website-data.js file
-function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $addToCode, $prices){
-    global $delete, $tmpFolder, $prefix ;
+function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $addToCode, $prices, $returnAddressId, $type, $nicheType){
+    global $delete, $tmpFolder, $prefix, $js_texts;
+    // print_r($js_texts);
+    // exit();
     // $userConfig = getFromCurrentSession_UserConfig($_COOKIE["current_session"]);
 
-    // .
+    // . Add "info.txt"
     $infoFile = $tmpFolder.$newSite."/info.txt";
     $myfile = fopen($infoFile, "w") or die("Unable to open file!");
     $txt = "// -- Template Name: ".str_replace($prefix,"", zipName($url));
@@ -330,7 +349,9 @@ function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $
         // .
         foreach ($delete as $d) {
             if(strpos($fof, $d)){
-                unlink($fof);
+                if(is_file($fof)){
+                    unlink($fof);
+                }
             }
         }
 
@@ -345,6 +366,17 @@ function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $
                 default:
                     break;
             }
+        }
+
+        # -- (TEMPORARY) DELETE "Affiliate program" from all html, php files
+        switch (true) {
+            case strpos($fof, ".html"):
+                removeAffiliateProgram($fof);
+                break;
+            case strpos($fof, ".php"):
+                removeAffiliateProgram($fof);
+                break;
+            default: break;
         }
     
         // .
@@ -371,6 +403,33 @@ function performActions($newSite, $newSiteFilePaths, $url, $wd, $replaceOptns, $
             default: break;
         }
     }
+
+    // . Add default "products.js" if niche type is special
+    if($nicheType == "special"){
+        $products_js = $tmpFolder.$newSite.'/js/data/products.js';
+        $myfile = fopen($products_js, "w") or die("Unable to open file!");
+        
+        switch ($type) {
+            case 'keto': fwrite($myfile, $js_texts["keto_js"]); break;
+            case 'preworkout': fwrite($myfile, $js_texts["preworkout_js"]); break;
+            case 'skincare': fwrite($myfile, $js_texts["skincare_js"]); break;
+            default: break;
+        }
+        fclose($myfile);
+    }
+}
+
+function removeAffiliateProgram($file){
+    $myfile = fopen($file, "r") or die("Unable to open file!");
+    $fileContent = fread($myfile,filesize($file));
+    fclose($myfile);
+
+    $newContent = str_replace("Affiliate Program", "", $fileContent);
+    $newContent = str_replace("affiliate-program", "", $newContent);
+
+    $myNewFile = fopen($file, "w") or die("Unable to open file!");
+    fwrite($myNewFile, $newContent);
+    fclose($myNewFile);
 }
 
 function updatePriceScript($file){
@@ -430,6 +489,8 @@ function addTaglines($wdFile, $replaceTaglines){
     global $type;
     $mainTgKey = 0;
     $subTgKey = 0;
+    $sec_mainTgKey = 0;
+    $sec_subTgKey = 0;
 
     // Read "website-data.js" file
     $myfile = fopen($wdFile, "r") or die("Unable to open file!");
@@ -437,11 +498,20 @@ function addTaglines($wdFile, $replaceTaglines){
     fclose($myfile);   
 
     $arrayFromString = explode("\n",$websiteDataTxt);
+    // print_r($arrayFromString);
     foreach ($arrayFromString as $i => $ln) {
         switch (true) {
-            case strpos($ln, "MAIN_TAGLINE ="): $mainTgKey = $i;
+            case strpos($ln, "MAIN_TAGLINE ="): 
+                $mainTgKey = $i;
                 break;
-            case strpos($ln, "SECONDARY_TAGLINE ="): $subTgKey = $i;
+            case strpos($ln, "SECONDARY_TAGLINE ="): 
+                $subTgKey = $i;
+                break;
+            case strpos($ln, "MAIN_SECOND_TAGLINE ="): 
+                $sec_mainTgKey = $i;
+                break;
+            case strpos($ln, "SECONDARY_SECOND_TAGLINE ="): 
+                $sec_subTgKey = $i;
                 break;
             default:
                 break;
@@ -461,6 +531,12 @@ function addTaglines($wdFile, $replaceTaglines){
             case 'sub':
                 $nTgln = str_replace("[TYPE]", $type, $tagline);
                 $arrayFromString[$subTgKey] = "const SECONDARY_TAGLINE = '$nTgln';";
+                break;
+            case 'second_main':
+                $arrayFromString[$sec_mainTgKey] = "const MAIN_SECOND_TAGLINE = '$tagline';";
+                break;
+            case 'second_sub':
+                $arrayFromString[$sec_subTgKey] = "const SECONDARY_SECOND_TAGLINE = '$tagline';";
                 break;
             default:
                 break;

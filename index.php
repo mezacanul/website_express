@@ -79,15 +79,15 @@
                 <h3>Template Configuration</h3>
                 <label for="type">Type: </label>
                 <select name="type"></select>
-                <label for="prices">Prices: </label>
-                <select name="prices"></select>
+                <!-- <label for="prices">Prices: </label>
+                <select name="prices"></select> -->
                 <br style="margin-bottom: 2rem">
 
                 <label for="template">Template: </label>
                 <select name="template" id="templateSelect"></select>
-                <button onclick="selectRandTemplate()" type="button" class="randBtn">Random</button>
                 <!-- <input type="text" name="template" placeholder="Template URL"> -->
                 <a class="templatePreviewLink" target="_blank"></a>
+                <button onclick="selectRandTemplate()" type="button" class="randBtn">&#128256;</button>
                 <br style="margin-bottom: 2rem">
     
                 <div class="productOptions">

@@ -1,5 +1,17 @@
 <?php 
 
+$showSessionInfo = 0;
+
+if($showSessionInfo == 1){
+    echo "<b><u>PHP session_id():</u></b> ".session_id(); echo "<br>";
+    print_r('<b><u>COOKIE ["current_session"]:</u></b> '.$_COOKIE["current_session"]); echo "<br>";
+    echo "<b><u>COOKIE var:</u></b> "; print_r($_COOKIE); echo "<br>";
+    echo "<b><u>SESSION var:</u></b> "; print_r($_SESSION); echo "<br>";
+}
+
+// print_r("Session State: ".getCurrentSessionState($_COOKIE["current_session"])); echo "<br>";
+// exit();
+
 // -- Current file name
 // echo basename(__FILE__, '.php'); 
 

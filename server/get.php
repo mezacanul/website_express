@@ -3,6 +3,57 @@ require_once("credentials.php");
 require_once("db-routines.php");
 require_once("main-tools.php");
 
+switch ($_POST["action"]) {
+  case "search":
+    if($_POST["type"] != "default"){
+      echo json_encode(search($_POST["clue"], $_POST["type"], $_POST["offset"]));
+    } else {
+      echo json_encode(search($_POST["clue"], "", $_POST["offset"]));
+    } 
+    break;
+  case "countResults":
+    if($_POST["type"] != "default"){
+      echo json_encode(countResults($_POST["clue"], $_POST["type"]));
+    } else {
+      echo json_encode(countResults($_POST["clue"]));
+    } 
+    break;
+  case "getAll":
+    echo json_encode(getAll());
+    break;
+  case "getTypes":
+    echo json_encode(getTypes());
+    break;
+  case "getPriceRanges":
+    echo json_encode(getPriceRanges());
+    break;
+  case "getItemDetails":
+    echo json_encode(getItemDetails($_POST["sku"]));
+    break;
+  case "getPriceBanks":
+    echo json_encode(getPriceBanks());
+    break;
+  case "getBatch":
+    echo json_encode(getBatch($_POST["type"], $_POST["priceParams"]));
+    break;
+  case "getTemplates":
+    echo json_encode(getTemplates($_POST["nicheType"]));
+    break;
+  case "getTemplateInfo":
+    echo json_encode(getTemplateInfo($_POST["templateId"]));
+    break;
+  case "getPriceList":
+    echo json_encode(getPriceList($_POST["bank"]));
+    break;
+  case "switchProduct":
+    echo json_encode(switchProduct($_POST));
+  case "getReturnAddressAll":
+    echo json_encode(getReturnAddressAll());
+    break;
+  default:
+    exit();
+}
+
 function getAll(){
 
   $getAll = "SELECT * FROM products";
@@ -100,9 +151,11 @@ function getBatch($type, $priceParams){
   return $products;
 }
 
-function getTemplates(){
-
-  $getTemplates = "SELECT * FROM templates ORDER BY url";
+function getTemplates($nicheType){
+  if($nicheType != "") { $whereClause = "WHERE type = '$nicheType' "; } 
+  else { $whereClause = ""; }
+  
+  $getTemplates = "SELECT * FROM templates $whereClause ORDER BY url";
   $all = getQuery($getTemplates);
   
   return $all;
@@ -130,57 +183,6 @@ function getReturnAddressAll(){
   $getReturnAddressAll = "SELECT * FROM returnAddress";
   $all = getQuery($getReturnAddressAll);
   return $all;
-}
-
-switch ($_POST["action"]) {
-  case "search":
-    if($_POST["type"] != "default"){
-      echo json_encode(search($_POST["clue"], $_POST["type"], $_POST["offset"]));
-    } else {
-      echo json_encode(search($_POST["clue"], "", $_POST["offset"]));
-    } 
-    break;
-  case "countResults":
-    if($_POST["type"] != "default"){
-      echo json_encode(countResults($_POST["clue"], $_POST["type"]));
-    } else {
-      echo json_encode(countResults($_POST["clue"]));
-    } 
-    break;
-  case "getAll":
-    echo json_encode(getAll());
-    break;
-  case "getTypes":
-    echo json_encode(getTypes());
-    break;
-  case "getPriceRanges":
-    echo json_encode(getPriceRanges());
-    break;
-  case "getItemDetails":
-    echo json_encode(getItemDetails($_POST["sku"]));
-    break;
-  case "getPriceBanks":
-    echo json_encode(getPriceBanks());
-    break;
-  case "getBatch":
-    echo json_encode(getBatch($_POST["type"], $_POST["priceParams"]));
-    break;
-  case "getTemplates":
-    echo json_encode(getTemplates());
-    break;
-  case "getTemplateInfo":
-    echo json_encode(getTemplateInfo($_POST["templateId"]));
-    break;
-  case "getPriceList":
-    echo json_encode(getPriceList($_POST["bank"]));
-    break;
-  case "switchProduct":
-    echo json_encode(switchProduct($_POST));
-  case "getReturnAddressAll":
-    echo json_encode(getReturnAddressAll());
-    break;
-  default:
-    exit();
 }
 
 ?>

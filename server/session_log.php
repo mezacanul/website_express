@@ -6,7 +6,7 @@ date_default_timezone_set("America/Mexico_City");
 function addSessionLog($session_id, $user_id, $status, $expires){
     $date_time = date("Y-m-d H:i:s", substr(time(), 0, 10));
     $expires = $expires;
-    $addLog = "INSERT INTO session_log (session_id, user_id, current_state, created, expires) VALUES ('$session_id', '$user_id', '$status', '$date_time', $expires)";
+    $addLog = "INSERT INTO session_log (session_id, user_id, current_state, created, expires, closed) VALUES ('$session_id', '$user_id', '$status', '$date_time', $expires, 0)";
     $insertResult = addQuery($addLog);
     return $insertResult;
 }
